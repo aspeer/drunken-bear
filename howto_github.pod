@@ -528,38 +528,51 @@ However XLink links are not checked during validation, while xml:id/linkend link
 
 Some elements were renamed to better express their meaning or to reduce the total number of elements available in DocBook.
 
-|Old name|New name|
-|--------|--------|
-|sgmltag|tag|
-|bookinfo, articleinfo, chapterinfo, *info|info|
-|authorblurb|personblurb|
-|collabname, corpauthor, corpcredit, corpname|orgname|
-|isbn, issn, pubsnumber|biblioid|
-|lot, lotentry, tocback, tocchap, tocfront, toclevel1, toclevel2, toclevel3, toclevel4, toclevel5, tocpart|tocdiv|
-|graphic, graphicco, inlinegraphic, mediaobjectco|mediaobject and inlinemediaobject|
-|ulink|link|
-|ackno|acknowledgements|
-
-
++-----------------------------------------------------------------------------------------------------------+-----------------------------------+
+| Old name                                                                                                  | New name                          |
+| --------                                                                                                  | --------                          |
+| sgmltag                                                                                                   | tag                               |
+| bookinfo, articleinfo, chapterinfo, *info                                                                 | info                              |
+| authorblurb                                                                                               | personblurb                       |
+| collabname, corpauthor, corpcredit, corpname                                                              | orgname                           |
+| isbn, issn, pubsnumber                                                                                    | biblioid                          |
+| lot, lotentry, tocback, tocchap, tocfront, toclevel1, toclevel2, toclevel3, toclevel4, toclevel5, tocpart | tocdiv                            |
+| graphic, graphicco, inlinegraphic, mediaobjectco                                                          | mediaobject and inlinemediaobject |
+| ulink                                                                                                     | link                              |
+| ackno                                                                                                     | acknowledgements                  |
+|                                                                                                           |                                   |
++-----------------------------------------------------------------------------------------------------------+-----------------------------------+
 =head2 Removed elements
 
 The following elements were removed from DocBook V5.0 without direct replacements: action, beginpage, highlights, interface, invpartnumber, medialabel, modespec, structfield, structname. If you use one or more of these elements, here are some suggestions as to how to re-code them in DocBook V5.0.
 
-|Old name|Recommended mapping|
-|--------|-------------------|
-|action|Use C<<< < remap="action"> >>>.|
-|beginpage|Remove: beginpage is advisory only and has tended to cause confusion. A processing instruction or comment should be a workable replacement if one is needed.|
-|highlights|Use abstract. Note that because highlights has a broader content model, you may need to wrap contents in a para inside abstract.|
-|interface|Use one of the “gui*” elements (guibutton, guiicon, guilabel, guimenu, guimenuitem, or guisubmenu).|
-|invpartnumber|Use  < class="other"
- otherclass="medialabel">. The productnumber element is another alternative.|
-|medialabel|Use  <
- pubwork="">, where mediatype is the type of media being labeled (e.g.,cdrom or dvd).|
-|modespec|No longer needed. The current processing model for olink renders modespec unnecessary.|
-|structfield, structname|Use varname. If you need to distinguish between the two, use  <
- remap="">. In some contexts, it may also be appropriate to use property for structfield.|
-
-
+C<<< < remap="action"> >>>+-----------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Old name                                                                                                  | New name                                                                                                                                                     |
+| --------                                                                                                  | --------                                                                                                                                                     |
+| sgmltag                                                                                                   | tag                                                                                                                                                          |
+| bookinfo, articleinfo, chapterinfo, *info                                                                 | info                                                                                                                                                         |
+| authorblurb                                                                                               | personblurb                                                                                                                                                  |
+| collabname, corpauthor, corpcredit, corpname                                                              | orgname                                                                                                                                                      |
+| isbn, issn, pubsnumber                                                                                    | biblioid                                                                                                                                                     |
+| lot, lotentry, tocback, tocchap, tocfront, toclevel1, toclevel2, toclevel3, toclevel4, toclevel5, tocpart | tocdiv                                                                                                                                                       |
+| graphic, graphicco, inlinegraphic, mediaobjectco                                                          | mediaobject and inlinemediaobject                                                                                                                            |
+| ulink                                                                                                     | link                                                                                                                                                         |
+| ackno                                                                                                     | acknowledgements                                                                                                                                             |
+| Old name                                                                                                  | Recommended mapping                                                                                                                                          |
+| --------                                                                                                  | -------------------                                                                                                                                          |
+| action                                                                                                    | .                                                                                                                                                            |
+| beginpage                                                                                                 | Remove: beginpage is advisory only and has tended to cause confusion. A processing instruction or comment should be a workable replacement if one is needed. |
+| highlights                                                                                                | Use abstract. Note that because highlights has a broader content model, you may need to wrap contents in a para inside abstract.                             |
+| interface                                                                                                 | Use one of the “gui*” elements (guibutton, guiicon, guilabel, guimenu, guimenuitem, or guisubmenu).                                                      |
+| invpartnumber                                                                                             | Use `< class="other"                                                                                                                                         |
+| otherclass="medialabel">`. The productnumber element is another alternative.                              |                                                                                                                                                              |
+| medialabel                                                                                                | Use `<                                                                                                                                                       |
+| pubwork="">`, where mediatype is the type of media being labeled (e.g.,cdrom or dvd).                     |                                                                                                                                                              |
+| modespec                                                                                                  | No longer needed. The current processing model for olink renders modespec unnecessary.                                                                       |
+| structfield, structname                                                                                   | Use varname. If you need to distinguish between the two, use `<                                                                                              |
+| remap="">`. In some contexts, it may also be appropriate to use property for structfield.                 |                                                                                                                                                              |
+|                                                                                                           |                                                                                                                                                              |
++-----------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 =head1 Converting DocBook V4.x documents to DocBook V5.0
 
 The DocBook V5.0 schema ships with an XSLT 1.0 stylesheet that is designed to transform valid DocBook V4.x documents to valid DocBook V5.0 documents.
@@ -1182,12 +1195,12 @@ namespace mml = "http://www.w3.org/1998/Math/MathML"
 namespace db = "http://docbook.org/ns/docbook"
 
 include "/path/to/docbook.rnc" {
-  db._any.mml = external "mathml/mathml2.rnc"
-  db._any =
-    element * - (db:* | html:* | mml:*) {
-      (attribute * { text }
+  db.I<any.mml = external "mathml/mathml2.rnc"
+  db.>any =
+    element I< - (db:> | html:I< | mml:>) {
+      (attribute I< { text }
        | text
-       | db._any)*
+       | db._any)>
     }
 }
 ```
@@ -1244,12 +1257,12 @@ namespace db = "http://docbook.org/ns/docbook"
 namespace svg = "http://www.w3.org/2000/svg"
 
 include "/path/to/docbook.rnc" {
-  db._any.svg = external "svg/svg11.rnc"
-  db._any =
-    element * - (db:* | html:* | svg:*) {
-      (attribute * { text }
+  db.I<any.svg = external "svg/svg11.rnc"
+  db.>any =
+    element I< - (db:> | html:I< | svg:>) {
+      (attribute I< { text }
        | text
-       | db._any)*
+       | db._any)>
     }
 }
 ```
@@ -1303,13 +1316,13 @@ namespace db = "http://docbook.org/ns/docbook"
 namespace svg = "http://www.w3.org/2000/svg"
 
 include "/path/to/docbook.rnc" {
-  db._any.mml = external "mahtml/mathml2.rnc"
-  db._any.svg = external "svg/svg11.rnc"
-  db._any =
+  db.I<any.mml = external "mahtml/mathml2.rnc"
+  db.>any.svg = external "svg/svg11.rnc"
+  db.I<any =
     element * - (db:* | html:* | mml:* | svg:*) {
       (attribute * { text }
        | text
-       | db._any)*
+       | db.>any)*
     }
 }
 ```
