@@ -528,6 +528,7 @@ However XLink links are not checked during validation, while xml:id/linkend link
 
 Some elements were renamed to better express their meaning or to reduce the total number of elements available in DocBook.
 
+=over
 +-----------------------------------------------------------------------------------------------------------+-----------------------------------+
 | Old name                                                                                                  | New name                          |
 | --------                                                                                                  | --------                          |
@@ -541,12 +542,14 @@ Some elements were renamed to better express their meaning or to reduce the tota
 | ulink                                                                                                     | link                              |
 | ackno                                                                                                     | acknowledgements                  |
 |                                                                                                           |                                   |
-+-----------------------------------------------------------------------------------------------------------+-----------------------------------+
++-----------------------------------------------------------------------------------------------------------+-----------------------------------+=back
+
 =head2 Removed elements
 
 The following elements were removed from DocBook V5.0 without direct replacements: action, beginpage, highlights, interface, invpartnumber, medialabel, modespec, structfield, structname. If you use one or more of these elements, here are some suggestions as to how to re-code them in DocBook V5.0.
 
-C<<< < remap="action"> >>>+-----------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+C<<< < remap="action"> >>>=over
++-----------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Old name                                                                                                  | New name                                                                                                                                                     |
 | --------                                                                                                  | --------                                                                                                                                                     |
 | sgmltag                                                                                                   | tag                                                                                                                                                          |
@@ -572,7 +575,8 @@ C<<< < remap="action"> >>>+-----------------------------------------------------
 | structfield, structname                                                                                   | Use varname. If you need to distinguish between the two, use `<                                                                                              |
 | remap="">`. In some contexts, it may also be appropriate to use property for structfield.                 |                                                                                                                                                              |
 |                                                                                                           |                                                                                                                                                              |
-+-----------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+=back
+
 =head1 Converting DocBook V4.x documents to DocBook V5.0
 
 The DocBook V5.0 schema ships with an XSLT 1.0 stylesheet that is designed to transform valid DocBook V4.x documents to valid DocBook V5.0 documents.
