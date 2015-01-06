@@ -85,12 +85,14 @@ Some document constraints can't be expressed in schema languages like RELAX NG o
 
 <table>
 <caption>Schema Comparison</caption>
+<colgroup>
 <col width="44%" />
 <col width="11%" />
 <col width="11%" />
 <col width="11%" />
 <col width="11%" />
 <col width="11%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Description</th>
@@ -237,7 +239,7 @@ Because DocBook is an XML-based format and XML is a text-based format, you can u
 
 nXML uses a special configuration file named `schemas.xml` to associate schemas with XML documents. Often you will find this file in the directory `site-lisp/nxml/schema` inside the Emacs installation directory. Adding the following line into the configuration file, will associate DocBook V5.0 elements with the appropriate schema:
 
-    <namespace ns="http://docbook.org/ns/docbook" uri="docbook.rnc"/>
+    <namespace ns="http://docbook.org/ns/docbook" uri="/path/to/docbook.rnc"/>
 
 > **Note**
 >
@@ -246,7 +248,7 @@ nXML uses a special configuration file named `schemas.xml` to associate schemas 
 If you can't edit the global `schemas.xml` file, you can create this file in the same directory as your document. nXML will find associations placed there also. In this case you must create a complete configuration file like:
 
     <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
-      <namespace ns="http://docbook.org/ns/docbook" uri="docbook.rnc"/>
+      <namespace ns="http://docbook.org/ns/docbook" uri="/path/to/docbook.rnc"/>
     </locatingRules>
 
 ### oXygen
@@ -263,7 +265,7 @@ XML Mind XML editor (XXE) is a visual validating XML editor that provides a word
 
 ![XML Mind XML Editor – feels almost like MS Word but real DocBook V5.0 markup is created](images/xxe.png)
 
-In order to use DocBook V5.0 in XXE you have to install an add-on. Go to OptionsInstall Add-ons…. Then choose DocBook 5 configuration and press the OK button. After restart, XXE is ready to work with DocBook V5.0 documents.
+In order to use DocBook V5.0 in XXE you have to install an add-on. Go to <span class="menuchoice">Options \> Install Add-ons…</span>. Then choose DocBook 5 configuration and press the OK button. After restart, XXE is ready to work with DocBook V5.0 documents.
 
 Validating DocBook V5.0
 -----------------------
@@ -284,7 +286,7 @@ Unpack the downloaded file into an arbitrary directory.
 
 Validate your document using the following command:
 
-     -Xss512K -jar relames.jar docbook.rng document.xml
+    java -Xss512K -jar /path/to/relames.jar /path/to/docbook.rng document.xml
 
 > **Note**
 >
@@ -304,7 +306,7 @@ Unpack the downloaded file into an arbitrary directory.
 
 Validate your document using the following command:
 
-     -jar bin/onvdl.jar docbook.nvdl document.xml
+    java -jar /path/to/oNVDL/bin/onvdl.jar /path/to/docbook.nvdl document.xml
 
 Download the latest release of JNVDL from <http://sourceforge.net/project/showfiles.php?group_id=164464>.
 
@@ -314,11 +316,11 @@ Modify file `jnvdl.bat` (or `jnvdl.sh` on Unix based systems) to include `-Xss51
 
 On Windows systems, validate your document using the following command:
 
-     -nt -s docbook.nvdl document.xml
+    /path/to/jnvdl/jnvdl -nt -s /path/to/docbook.nvdl document.xml
 
 On Unix systems, validate your document using the following command:
 
-     -nt -s docbook.nvdl document.xml
+    /path/to/jnvdl/jnvdl.sh -nt -s /path/to/docbook.nvdl document.xml
 
 Processing DocBook V5.0
 -----------------------
@@ -374,11 +376,11 @@ There are not very many XSLT 2.0 implementations available. But, if you want to 
 
 To transform a DocBook V5.0 document to a single HTML page use the command:
 
-     -jar saxon9.jar -o output.html document.xml docbook-xsl2-snapshot/html/docbook.xsl
+    java -jar /path/to/saxon9.jar -o output.html document.xml /path/to/docbook-xsl2-snapshot/html/docbook.xsl
 
 To transform a DocBook V5.0 document to a set of chunked HTML pages use the command:
 
-     -jar saxon9.jar document.xml docbook-xsl2-snapshot/html/chunk.xsl
+    java -jar /path/to/saxon9.jar document.xml /path/to/docbook-xsl2-snapshot/html/chunk.xsl
 
 Markup changes
 ==============
@@ -443,36 +445,37 @@ Renamed elements
 
 Some elements were renamed to better express their meaning or to reduce the total number of elements available in DocBook.
 
-|Old name|New name|
-|--------|--------|
-|sgmltag|tag|
-|bookinfo, articleinfo, chapterinfo, \*info|info|
-|authorblurb|personblurb|
-|collabname, corpauthor, corpcredit, corpname|orgname|
-|isbn, issn, pubsnumber|biblioid|
-|lot, lotentry, tocback, tocchap, tocfront, toclevel1, toclevel2, toclevel3, toclevel4, toclevel5, tocpart|tocdiv|
-|graphic, graphicco, inlinegraphic, mediaobjectco|mediaobject and inlinemediaobject|
-|ulink|link|
-|ackno|acknowledgements|
+| Old name                                                                                                  | New name                          |
+|-----------------------------------------------------------------------------------------------------------|-----------------------------------|
+| sgmltag                                                                                                   | tag                               |
+| bookinfo, articleinfo, chapterinfo, \*info                                                                | info                              |
+| authorblurb                                                                                               | personblurb                       |
+| collabname, corpauthor, corpcredit, corpname                                                              | orgname                           |
+| isbn, issn, pubsnumber                                                                                    | biblioid                          |
+| lot, lotentry, tocback, tocchap, tocfront, toclevel1, toclevel2, toclevel3, toclevel4, toclevel5, tocpart | tocdiv                            |
+| graphic, graphicco, inlinegraphic, mediaobjectco                                                          | mediaobject and inlinemediaobject |
+| ulink                                                                                                     | link                              |
+| ackno                                                                                                     | acknowledgements                  |
 
 Removed elements
 ----------------
 
 The following elements were removed from DocBook V5.0 without direct replacements: action, beginpage, highlights, interface, invpartnumber, medialabel, modespec, structfield, structname. If you use one or more of these elements, here are some suggestions as to how to re-code them in DocBook V5.0.
 
-|Old name|Recommended mapping|
-|--------|-------------------|
-|action|Use `< remap="action">`.|
-|beginpage|Remove: beginpage is advisory only and has tended to cause confusion. A processing instruction or comment should be a workable replacement if one is needed.|
-|highlights|Use abstract. Note that because highlights has a broader content model, you may need to wrap contents in a para inside abstract.|
-|interface|Use one of the “gui\*” elements (guibutton, guiicon, guilabel, guimenu, guimenuitem, or guisubmenu).|
-|invpartnumber|Use `< class="other"
-otherclass="medialabel">`. The productnumber element is another alternative.|
-|medialabel|Use `<
-pubwork="">`, where mediatype is the type of media being labeled (e.g.,cdrom or dvd).|
-|modespec|No longer needed. The current processing model for olink renders modespec unnecessary.|
-|structfield, structname|Use varname. If you need to distinguish between the two, use `<
-remap="">`. In some contexts, it may also be appropriate to use property for structfield.|
+| Old name                | Recommended mapping                                                                                                                                          |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| action                  | Use `<phrase remap="action">`.                                                                                                                               |
+| beginpage               | Remove: beginpage is advisory only and has tended to cause confusion. A processing instruction or comment should be a workable replacement if one is needed. |
+| highlights              | Use abstract. Note that because highlights has a broader content model, you may need to wrap contents in a para inside abstract.                             |
+| interface               | Use one of the “gui\*” elements (guibutton, guiicon, guilabel, guimenu, guimenuitem, or guisubmenu).                                                         |
+| invpartnumber           | Use `<biblioid class="other"                                                                                                                                 
+                           otherclass="medialabel">`. The productnumber element is another alternative.                                                                                  |
+| medialabel              | Use `<citetitle                                                                                                                                              
+                           pubwork="mediatype">`, where mediatype is the type of media being labeled (e.g.,cdrom or dvd).                                                                |
+| modespec                | No longer needed. The current processing model for olink renders modespec unnecessary.                                                                       |
+| structfield, structname | Use varname. If you need to distinguish between the two, use `<varname                                                                                       
+                           remap="structname or                                                                                                                                          
+                           structfield">`. In some contexts, it may also be appropriate to use property for structfield.                                                                 |
 
 Converting DocBook V4.x documents to DocBook V5.0
 =================================================
@@ -552,13 +555,13 @@ Because named patterns are used extensively, the RELAX NG schema uses several na
 
 -   The first part of each name is the prefix “db”
 
--   Each element has a named pattern in the form `db.`. Elements that have different content models in different contexts will also have patterns in the form `db.`. For example, `db.figure.info` defines the content model for the info element when it appears as a child of the figure element. Context may have several parts. For example, `db.cals.entrytbl.thead`.
+-   Each element has a named pattern in the form `db.elementname`. Elements that have different content models in different contexts will also have patterns in the form `db.context.elementname`. For example, `db.figure.info` defines the content model for the info element when it appears as a child of the figure element. Context may have several parts. For example, `db.cals.entrytbl.thead`.
 
--   Most attributes have a named pattern in the form `db..attribute`. Attributes that have different content models in different contexts will also have patterns in the form `db..attribute`. For example, `db.olink.localinfo.attribute` defines the content model of the localinfo attribute when it appears in olink. There are a few attributes that do not have individual named patterns. For example, the effectivity attributes are grouped into `db.effectivity.attributes` and not identified separately.
+-   Most attributes have a named pattern in the form `db.attributename.attribute`. Attributes that have different content models in different contexts will also have patterns in the form `db.context.attributename.attribute`. For example, `db.olink.localinfo.attribute` defines the content model of the localinfo attribute when it appears in olink. There are a few attributes that do not have individual named patterns. For example, the effectivity attributes are grouped into `db.effectivity.attributes` and not identified separately.
 
--   Each element has a named pattern for its attribute list in the form `db..attlist` that defines the list of attributes for that element. Elements that have different attribute lists in different contexts will also have patterns in the form `db..attlist` For example, `db.html.table.attlist` defines the attribute list for the html table element and `db.cals.table.attlist` defines the attribute list for a cals table element.
+-   Each element has a named pattern for its attribute list in the form `db.elementname.attlist` that defines the list of attributes for that element. Elements that have different attribute lists in different contexts will also have patterns in the form `db.context.elementname.attlist` For example, `db.html.table.attlist` defines the attribute list for the html table element and `db.cals.table.attlist` defines the attribute list for a cals table element.
 
--   Each attribute that has enumerated values has a named pattern in the form `db..enumeration`. If the enumeration for a particular attribute depends on context, optional context is provided. For example, `db.verbatim.continuation.enumeration` defines the enumeration values for the continuation attribute that is used in verbatim contexts like screen. Unlike elements and attributes, there is not necessarily a named pattern for enumerated attributes outside their context. For example, there is no `db.class.enumeration` because the class attribute has a broad and non-intersecting range of uses.
+-   Each attribute that has enumerated values has a named pattern in the form `db.[context.]attributename.enumeration`. If the enumeration for a particular attribute depends on context, optional context is provided. For example, `db.verbatim.continuation.enumeration` defines the enumeration values for the continuation attribute that is used in verbatim contexts like screen. Unlike elements and attributes, there is not necessarily a named pattern for enumerated attributes outside their context. For example, there is no `db.class.enumeration` because the class attribute has a broad and non-intersecting range of uses.
 
 -   There are several different groupings of elements and attributes. Here are the major ones:
 
@@ -586,7 +589,7 @@ Creating a customized schema is similar to creating a customization layer for XS
 
 ? is an empty RELAX NG customization that does nothing except define the name spaces and include the standard DocBook schema. The href attribute of the include element points to the location of the standard DocBook V5.0 schema.[6] All of the examples are given in both RNG and RNC form.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -598,7 +601,7 @@ Creating a customized schema is similar to creating a customization layer for XS
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 namespace db = "http://docbook.org/ns/docbook"
 
 include "docbook.rnc" inherit = db
@@ -616,7 +619,7 @@ Adding an element typically takes two definitions. The first defines the new ele
 
 The `db.author` pattern is copied and renamed `dbx.person`, defining a new element called person. Then, the `db.author` pattern is redefined to be a choice of the current value or `dbx.person`. The combine attribute tells RELAX NG to combine this pattern with the existing named pattern. In this case, the value of the combine attribute is “choice”, which tells the parser that either the original pattern or this new pattern is a valid match.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -637,7 +640,7 @@ The `db.author` pattern is copied and renamed `dbx.person`, defining a new eleme
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 default namespace db = "http://docbook.org/ns/docbook"
 
 include "docbook.rnc"
@@ -653,7 +656,7 @@ The preceding method works well when you'd like a new element to be a clone or n
 
 ? adds two new elements by combining them into a higher level pattern. In this example, we'll add two new inline elements for writing about assembly language, register and instruction. We will allow them wherever programming inlines or operating system inlines are allowed. ? defines the two elements, creates a new named pattern (`dbx.asm.inlines`) that contains them, and adds that pattern to `db.programming.inlines` and `db.os.inlines`. Since these two patterns don't have any elements in common, the strategy used in ? would require selecting two different elements to “clone”, which would be messy.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -687,7 +690,7 @@ The preceding method works well when you'd like a new element to be a clone or n
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 default namespace db = "http://docbook.org/ns/docbook"
 
 include "docbook.rnc"
@@ -707,7 +710,7 @@ Deleting elements is straightforward, but takes some care and planning. ? delete
 
 Be careful; If you delete an element that is a required part of another element's content model, you can make it impossible to create a valid document. For example, if you delete the title element, you won't be able to validate a book because a book requires a title.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -721,7 +724,7 @@ Be careful; If you delete an element that is a required part of another element'
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 namespace db = "http://docbook.org/ns/docbook"
 
 include "docbook.rnc" inherit = db {
@@ -734,7 +737,7 @@ include "docbook.rnc" inherit = db {
 
 ? expands the definition of author to include two new elements, born and died. The author element allows two content models, `db.person.author.contentmodel`, which defines an author who is a person, and `db.org.author.contentmodel`, which defines an author that is an organization. We will modify `db.person.author.contentmodel` so that only authors who are persons can have the new elements.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -758,7 +761,7 @@ include "docbook.rnc" inherit = db {
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 default namespace = "http://docbook.org/ns/docbook"
 namespace db = "http://docbook.org/ns/docbook"
 
@@ -793,7 +796,7 @@ Attributes
 
 The simplest way to add an attribute to a single element is to add it to the attlist pattern for that element. ? adds the optional attributes born and died to the attribute list for author. The `db.author.attlist` named pattern is redefined with the combine attribute set to “interleave”, which interleaves the two new optional attributes with the existing attributes on the list.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -817,7 +820,7 @@ The simplest way to add an attribute to a single element is to add it to the att
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 namespace db = "http://docbook.org/ns/docbook"
 
 include "docbook.rnc" inherit = db
@@ -831,7 +834,7 @@ Unlike ?, ? allows the new attributes to appear on any author element, not just 
 
 ? shows how you could limit the use of these attributes to authors who are persons. In this example, the new attributes are interleaved with the `db.person.author.contentmodel`. The only difference between this example and ? is that the added patterns are identified as attributes rather than elements. This shows some of the flexibility of RELAX NG, which treats attributes and elements very consistently.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -855,7 +858,7 @@ Unlike ?, ? allows the new attributes to appear on any author element, not just 
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 namespace db = "http://docbook.org/ns/docbook"
 
 include "docbook.rnc" inherit = db
@@ -871,7 +874,7 @@ There is one difference in the treatment of attributes and elements that is wort
 
 Deleting an attribute is similar to deleting an element, except that you use the RELAX NG `empty` pattern rather than `notAllowed`. ? deletes the linking attributes, which are collected in the `db.common.linking.attributes` pattern, by defining that pattern as `empty`.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -884,7 +887,7 @@ Deleting an attribute is similar to deleting an element, except that you use the
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 namespace db = "http://docbook.org/ns/docbook"
 
 include "docbook.rnc" inherit = db {
@@ -898,7 +901,7 @@ Generally, `empty` is used when deleting attributes and `notAllowed` is used whe
 
 ? modifies `db.spacing.enumeration` to add the additional value “large”. Note that to remove a value from an enumeration, you need to redefine the entire enumeration, minus the values you don't need.
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:db="http://docbook.org/ns/docbook"
          ns="http://docbook.org/ns/docbook"
@@ -911,7 +914,7 @@ Generally, `empty` is used when deleting attributes and `notAllowed` is used whe
 </grammar>
 ```
 
-``` {.rnc}
+``` rnc
 namespace db = "http://docbook.org/ns/docbook"
 
 include "docbook.rnc" inherit = db
@@ -935,7 +938,7 @@ If you create a DocBook schema customization you must change the version attribu
 
 When you customize the schema, use the following syntax to identify your DocBook derivation:
 
-    -[subset|extension|variant] [[-]?]+
+    base_version-[subset|extension|variant] [name[-version]?]+
 
 For example:
 
@@ -994,7 +997,7 @@ For your convenience there is also flattened entity definition file which contai
 
 **A:** If you are using XIncludes you should make sure that the final document after resolving all inclusions is valid DocBook V5.0 instance. This means that all XIncludes should be processed before validation takes place. The following command can be used to enable XInclude processing in oNVDL.
 
-     -Dorg.apache.xerces.xni.parser.XMLParserConfiguration=org.apache.xerces.parsers.XIncludeParserConfiguration -jar bin/onvdl.jar docbook.nvdl document.xml
+    java -Dorg.apache.xerces.xni.parser.XMLParserConfiguration=org.apache.xerces.parsers.XIncludeParserConfiguration -jar /path/to/oNVDL/bin/onvdl.jar /path/to/docbook.nvdl document.xml
 
 For JNVDL you can use switch `-xi` to enable XInclude processing.
 
@@ -1020,7 +1023,7 @@ Download the MathML RELAX NG schema from <http://yupotan.sppd.ne.jp/relax-ng/mml
 
 Create a schema customization in compact syntax—`dbmathml.rnc`:
 
-``` {.rnc}
+``` rnc
 namespace html = "http://www.w3.org/1999/xhtml"
 namespace mml = "http://www.w3.org/1998/Math/MathML"
 namespace db = "http://docbook.org/ns/docbook"
@@ -1038,7 +1041,7 @@ include "/path/to/docbook.rnc" {
 
 Or, alternatively, you can use the XML syntax of RELAX NG—`dbmathml.rng`:
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0">
 
@@ -1082,7 +1085,7 @@ Download the SVG RELAX NG schema from <http://www.w3.org/Graphics/SVG/1.1/rng/rn
 
 Create a schema customization in compact syntax—`dbsvg.rnc`:
 
-``` {.rnc}
+``` rnc
 namespace html = "http://www.w3.org/1999/xhtml"
 namespace db = "http://docbook.org/ns/docbook"
 namespace svg = "http://www.w3.org/2000/svg"
@@ -1100,7 +1103,7 @@ include "/path/to/docbook.rnc" {
 
 Or, alternatively, you can use the XML syntax of RELAX NG—`dbsvg.rng`:
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0">
 
@@ -1140,7 +1143,7 @@ Now use the customized schema (`dbsvg.rnc` or `dbsvg.rng`) instead of the origin
 
 **A:** Yes, you can create a special schema customization that combines both MathML and SVG with the DocBook schema. In compact syntax, the merged schema is:
 
-``` {.rnc}
+``` rnc
 namespace html = "http://www.w3.org/1999/xhtml"
 namespace mml = "http://www.w3.org/1998/Math/MathML"
 namespace db = "http://docbook.org/ns/docbook"
@@ -1160,7 +1163,7 @@ include "/path/to/docbook.rnc" {
 
 Or alternatively in the full RELAX NG syntax:
 
-``` {.rng}
+``` rng
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns="http://relaxng.org/ns/structure/1.0">
 
