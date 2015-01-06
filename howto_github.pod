@@ -551,13 +551,13 @@ The following elements were removed from DocBook V5.0 without direct replacement
 |beginpage|Remove: beginpage is advisory only and has tended to cause confusion. A processing instruction or comment should be a workable replacement if one is needed.|
 |highlights|Use abstract. Note that because highlights has a broader content model, you may need to wrap contents in a para inside abstract.|
 |interface|Use one of the “gui*” elements (guibutton, guiicon, guilabel, guimenu, guimenuitem, or guisubmenu).|
-|invpartnumber|Use     < class="other"
-    otherclass="medialabel">. The productnumber element is another alternative.|
-|medialabel|Use     <
-    pubwork="">, where mediatype is the type of media being labeled (e.g.,cdrom or dvd).|
+|invpartnumber|Use  < class="other"
+ otherclass="medialabel">. The productnumber element is another alternative.|
+|medialabel|Use  <
+ pubwork="">, where mediatype is the type of media being labeled (e.g.,cdrom or dvd).|
 |modespec|No longer needed. The current processing model for olink renders modespec unnecessary.|
-|structfield, structname|Use varname. If you need to distinguish between the two, use     <
-    remap="">. In some contexts, it may also be appropriate to use property for structfield.|
+|structfield, structname|Use varname. If you need to distinguish between the two, use  <
+ remap="">. In some contexts, it may also be appropriate to use property for structfield.|
 
 
 =head1 Converting DocBook V4.x documents to DocBook V5.0
@@ -744,25 +744,25 @@ Adding an element typically takes two definitions. The first defines the new ele
 
 The C<<< db.author >>> pattern is copied and renamed C<<< dbx.person >>>, defining a new element called person. Then, the C<<< db.author >>> pattern is redefined to be a choice of the current value or C<<< dbx.person >>>. The combine attribute tells RELAX NG to combine this pattern with the existing named pattern. In this case, the value of the combine attribute is “choice”, which tells the parser that either the original pattern or this new pattern is a valid match.
 
-    {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng"/>
-      <!-- define the new element -->
-      <define name="dbx.person">
-        <element name="person">
-            <ref name="db.author.attlist"/>
-            <ref name="db.credit.contentmodel"/>
-        </element>
-      </define>
-      <!-- redefine the db.author pattern to allow db.person in
-           the same places as db.author -->
-      <define name="db.author" combine="choice">
-        <ref name="dbx.person"/>
-      </define>
-    </grammar>
+ {.rng}
+ <?xml version="1.0" encoding="UTF-8"?>
+ <grammar xmlns:db="http://docbook.org/ns/docbook"
+          ns="http://docbook.org/ns/docbook"
+          xmlns="http://relaxng.org/ns/structure/1.0">
+   <include href="docbook.rng"/>
+   <!-- define the new element -->
+   <define name="dbx.person">
+     <element name="person">
+         <ref name="db.author.attlist"/>
+         <ref name="db.credit.contentmodel"/>
+     </element>
+   </define>
+   <!-- redefine the db.author pattern to allow db.person in
+        the same places as db.author -->
+   <define name="db.author" combine="choice">
+     <ref name="dbx.person"/>
+   </define>
+ </grammar>
 
 
 ```{.rnc}
@@ -789,38 +789,38 @@ The preceding method works well when you'd like a new element to be a clone or n
 
 ? adds two new elements by combining them into a higher level pattern. In this example, we'll add two new inline elements for writing about assembly language, register and instruction. We will allow them wherever programming inlines or operating system inlines are allowed. ? defines the two elements, creates a new named pattern (C<<< dbx.asm.inlines >>>) that contains them, and adds that pattern to C<<< db.programming.inlines >>> and C<<< db.os.inlines >>>. Since these two patterns don't have any elements in common, the strategy used in ? would require selecting two different elements to “clone”, which would be messy.
 
-    {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng"/>
-      <!-- define the new elements -->
-      <define name="dbx.register">
-        <element name="register">
-          <text/>
-        </element>
-      </define>
-      <define name="dbx.instruction">
-        <element name="instruction">
-          <text/>
-        </element>
-      </define>
-      <!-- create a new pattern that contains the new inlines -->
-      <define name="dbx.asm.inlines">
-        <choice>
-          <ref name="dbx.register"/>
-          <ref name="dbx.instruction"/>
-        </choice>
-      </define>
-      <!-- add the new inlines to programming and os inlines -->
-        <define name="db.programming.inlines" combine="choice">
-          <ref name="dbx.asm.inlines"/>
-        </define>
-        <define name="db.os.inlines" combine="choice">
-          <ref name="dbx.asm.inlines"/>
-        </define>
-    </grammar>
+ {.rng}
+ <?xml version="1.0" encoding="UTF-8"?>
+ <grammar xmlns:db="http://docbook.org/ns/docbook"
+          ns="http://docbook.org/ns/docbook"
+          xmlns="http://relaxng.org/ns/structure/1.0">
+   <include href="docbook.rng"/>
+   <!-- define the new elements -->
+   <define name="dbx.register">
+     <element name="register">
+       <text/>
+     </element>
+   </define>
+   <define name="dbx.instruction">
+     <element name="instruction">
+       <text/>
+     </element>
+   </define>
+   <!-- create a new pattern that contains the new inlines -->
+   <define name="dbx.asm.inlines">
+     <choice>
+       <ref name="dbx.register"/>
+       <ref name="dbx.instruction"/>
+     </choice>
+   </define>
+   <!-- add the new inlines to programming and os inlines -->
+     <define name="db.programming.inlines" combine="choice">
+       <ref name="dbx.asm.inlines"/>
+     </define>
+     <define name="db.os.inlines" combine="choice">
+       <ref name="dbx.asm.inlines"/>
+     </define>
+ </grammar>
 
 
 ```{.rnc}
@@ -853,18 +853,18 @@ Deleting elements is straightforward, but takes some care and planning. ? delete
 
 Be careful; If you delete an element that is a required part of another element's content model, you can make it impossible to create a valid document. For example, if you delete the title element, you won't be able to validate a book because a book requires a title.
 
-    {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng">
-        <!-- redefine important element as notAllowed -->
-        <define name="db.important">
-          <notAllowed/>
-        </define>
-      </include>
-    </grammar>
+ {.rng}
+ <?xml version="1.0" encoding="UTF-8"?>
+ <grammar xmlns:db="http://docbook.org/ns/docbook"
+          ns="http://docbook.org/ns/docbook"
+          xmlns="http://relaxng.org/ns/structure/1.0">
+   <include href="docbook.rng">
+     <!-- redefine important element as notAllowed -->
+     <define name="db.important">
+       <notAllowed/>
+     </define>
+   </include>
+ </grammar>
 
 
 ```{.rnc}
@@ -979,28 +979,28 @@ Unlike ?, ? allows the new attributes to appear on any author element, not just 
 
 ? shows how you could limit the use of these attributes to authors who are persons. In this example, the new attributes are interleaved with the C<<< db.person.author.contentmodel >>>. The only difference between this example and ? is that the added patterns are identified as attributes rather than elements. This shows some of the flexibility of RELAX NG, which treats attributes and elements very consistently.
 
-    {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng"/>
-      <!-- redefinitions of named patterns -->
-      <define name="db.person.author.contentmodel" combine="interleave">
-        <interleave>
-          <optional>
-            <attribute name="born">
-              <ref name="db.date.contentmodel"/>
-            </attribute>
-          </optional>
-          <optional>
-            <attribute name="died">
-              <ref name="db.date.contentmodel"/>
-            </attribute>
-          </optional>
-        </interleave>
-      </define>
-    </grammar>
+ {.rng}
+ <?xml version="1.0" encoding="UTF-8"?>
+ <grammar xmlns:db="http://docbook.org/ns/docbook"
+          ns="http://docbook.org/ns/docbook"
+          xmlns="http://relaxng.org/ns/structure/1.0">
+   <include href="docbook.rng"/>
+   <!-- redefinitions of named patterns -->
+   <define name="db.person.author.contentmodel" combine="interleave">
+     <interleave>
+       <optional>
+         <attribute name="born">
+           <ref name="db.date.contentmodel"/>
+         </attribute>
+       </optional>
+       <optional>
+         <attribute name="died">
+           <ref name="db.date.contentmodel"/>
+         </attribute>
+       </optional>
+     </interleave>
+   </define>
+ </grammar>
 
 
 ```{.rnc}
@@ -1023,17 +1023,17 @@ There is one difference in the treatment of attributes and elements that is wort
 
 Deleting an attribute is similar to deleting an element, except that you use the RELAX NG C<<< empty >>> pattern rather than C<<< notAllowed >>>. ? deletes the linking attributes, which are collected in the C<<< db.common.linking.attributes >>> pattern, by defining that pattern as C<<< empty >>>.
 
-    {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng">
-        <define name="db.common.linking.attributes">
-          <empty/>
-        </define>
-      </include>
-    </grammar>
+ {.rng}
+ <?xml version="1.0" encoding="UTF-8"?>
+ <grammar xmlns:db="http://docbook.org/ns/docbook"
+          ns="http://docbook.org/ns/docbook"
+          xmlns="http://relaxng.org/ns/structure/1.0">
+   <include href="docbook.rng">
+     <define name="db.common.linking.attributes">
+       <empty/>
+     </define>
+   </include>
+ </grammar>
 
 
 ```{.rnc}
@@ -1051,17 +1051,17 @@ Generally, C<<< empty >>> is used when deleting attributes and C<<< notAllowed >
 
 ? modifies C<<< db.spacing.enumeration >>> to add the additional value “large”. Note that to remove a value from an enumeration, you need to redefine the entire enumeration, minus the values you don't need.
 
-    {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng"/>
-      <!-- add value to an enumeration -->
-      <define name="db.spacing.enumeration" combine="choice">
-        <value>large</value>
-      </define>
-    </grammar>
+ {.rng}
+ <?xml version="1.0" encoding="UTF-8"?>
+ <grammar xmlns:db="http://docbook.org/ns/docbook"
+          ns="http://docbook.org/ns/docbook"
+          xmlns="http://relaxng.org/ns/structure/1.0">
+   <include href="docbook.rng"/>
+   <!-- add value to an enumeration -->
+   <define name="db.spacing.enumeration" combine="choice">
+     <value>large</value>
+   </define>
+ </grammar>
 
 
 ```{.rnc}
