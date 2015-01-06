@@ -40,6 +40,7 @@ The namespace name L<http://docbook.org/ns/docbook> serves only as an identifier
 
 =back
 
+
 =head2 Relaxing with DocBook
 
 For more than a decade, the DocBook schema was defined using a DTD. However, DTDs have serious limitations, and DocBook V5.0 is thus defined using a very powerful schema language called RELAX NG. Thanks to RELAX NG, it is now much easier to create customized versions of DocBook, and some content models are now cleaner and more precise.
@@ -73,6 +74,7 @@ B<Note>
 Although we recommend the RELAX NG schema for DocBook V5.0, there are also DTD and W3C XML Schema versions available (see ?) for tools that do not yet support RELAX NG.
 
 =back
+
 
 =head2 Why switch to DocBook V5.0?
 
@@ -264,6 +266,7 @@ Other parts of DocBook: The Definitive Guide have not yet been updated to reflec
 
 =back
 
+
 =head1 Tool chain
 
 This section briefly describes tools and procedures to edit and process content stored in DocBook V5.0.
@@ -291,6 +294,7 @@ B<Note>
 Please note that nXML ships with a file named C<<< docbook.rnc >>>. This file contains the RELAX NG grammar for DocBook V4.x. Be sure that you associate the DocBook V5.0 namespace with the corresponding DocBook V5.0 grammar.
 
 =back
+
 If you can't edit the global C<<< schemas.xml >>> file, you can create this file in the same directory as your document. nXML will find associations placed there also. In this case you must create a complete configuration file like:
 
     <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
@@ -344,6 +348,7 @@ B<Note>
 The switch C<<< -Xss512K >>> increases the stack size of the Java virtual machine. This is necessary because the DocBook schema is quite large. If you get stack overflow errors from MSV, increase this value. You may get spurious error messages if the value is too small, so if you get a stack overflow error, ignore any other error messages and try a larger value for the stack size. If you are not using Sun's Java implementation, please consult the documentation for your virtual machine to learn how to increase the stack size.
 
 =back
+
 There is also an L<on-line DocBook V5.0 validator|http://relaxed.vse.cz/docbookvalidator/> that validates DocBook V5.0 documents against the normative RELAX NG schema with embedded Schematron rules.
 
 
@@ -419,6 +424,7 @@ During namespace stripping, the base URI of the document is lost. This means tha
     WARNING: cannot add @xml:base to node set root element. Relative paths may not work.
 
 =back
+
 
 =head3 DocBook XSL-NS Stylesheets
 
@@ -621,6 +627,7 @@ B<Tip>
 Steps 2 and 5 from previous procedure can be automated using the L<cloak script|http://docbook.svn.sourceforge.net/viewvc/docbook/trunk/contrib/tools/cloak> written by Michael Smith.
 
 =back
+
 
 =head3 External Parsed Entities
 
