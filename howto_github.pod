@@ -30,7 +30,7 @@ The corresponding DocBook V5.0 article will look very similar:
       <para>This is a really short article.</para>
     </article>
 
-The only change is the addition of a default namespace declaration (C<<<     xmlns="http://docbook.org/ns/docbook" >>>) on the root element. This declaration applies the namespace to the root element and all nested elements. Each element is now uniquely identified by its local name and namespace.
+The only change is the addition of a default namespace declaration (C<<< 	xmlns="http://docbook.org/ns/docbook" >>>) on the root element. This declaration applies the namespace to the root element and all nested elements. Each element is now uniquely identified by its local name and namespace.
 
     B<Note>
     
@@ -269,15 +269,15 @@ L<nXML mode|http://www.thaiopensource.com/nxml-mode/> is an add-on for the GNU E
 
 =for html <img src="images/emacs.png" alt="Emacs with nXML mode provides guided editing and validation" />
 
-nXML uses a special configuration file named C<<<     schemas.xml >>> to associate schemas with XML documents. Often you will find this file in the directory C<<<     site-lisp/nxml/schema >>> inside the Emacs installation directory. Adding the following line into the configuration file, will associate DocBook V5.0 elements with the appropriate schema:
+nXML uses a special configuration file named C<<< 	schemas.xml >>> to associate schemas with XML documents. Often you will find this file in the directory C<<< 	site-lisp/nxml/schema >>> inside the Emacs installation directory. Adding the following line into the configuration file, will associate DocBook V5.0 elements with the appropriate schema:
 
     <namespace ns="http://docbook.org/ns/docbook" uri="docbook.rnc"/>
 
     B<Note>
     
-    Please note that nXML ships with a file named C<<<     docbook.rnc >>>. This file contains the RELAX NG grammar for DocBook V4.x. Be sure that you associate the DocBook V5.0 namespace with the corresponding DocBook V5.0 grammar.
+    Please note that nXML ships with a file named C<<< 	docbook.rnc >>>. This file contains the RELAX NG grammar for DocBook V4.x. Be sure that you associate the DocBook V5.0 namespace with the corresponding DocBook V5.0 grammar.
 
-If you can't edit the global C<<<     schemas.xml >>> file, you can create this file in the same directory as your document. nXML will find associations placed there also. In this case you must create a complete configuration file like:
+If you can't edit the global C<<< 	schemas.xml >>> file, you can create this file in the same directory as your document. nXML will find associations placed there also. In this case you must create a complete configuration file like:
 
     <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
       <namespace ns="http://docbook.org/ns/docbook" uri="docbook.rnc"/>
@@ -315,7 +315,7 @@ You can find a list of RELAX NG validators at L<http://relaxng.org/#validators>.
 
 Sun Multi-Schema XML Validator (MSV) is able to validate an XML document against a RELAX NG schema and Schematron rules at the same time. To install and use MSV follow these steps:
 
-Download C<<<     relames.zip >>> from L<https://msv.dev.java.net/servlets/ProjectDocumentList?folderID=101>.
+Download C<<< 	relames.zip >>> from L<https://msv.dev.java.net/servlets/ProjectDocumentList?folderID=101>.
 
 Unpack the downloaded file into an arbitrary directory.
 
@@ -325,7 +325,7 @@ Validate your document using the following command:
 
     B<Note>
     
-    The switch C<<<     -Xss512K >>> increases the stack size of the Java virtual machine. This is necessary because the DocBook schema is quite large. If you get stack overflow errors from MSV, increase this value. You may get spurious error messages if the value is too small, so if you get a stack overflow error, ignore any other error messages and try a larger value for the stack size. If you are not using Sun's Java implementation, please consult the documentation for your virtual machine to learn how to increase the stack size.
+    The switch C<<< 	-Xss512K >>> increases the stack size of the Java virtual machine. This is necessary because the DocBook schema is quite large. If you get stack overflow errors from MSV, increase this value. You may get spurious error messages if the value is too small, so if you get a stack overflow error, ignore any other error messages and try a larger value for the stack size. If you are not using Sun's Java implementation, please consult the documentation for your virtual machine to learn how to increase the stack size.
 
 There is also an L<on-line DocBook V5.0 validator|http://relaxed.vse.cz/docbookvalidator/> that validates DocBook V5.0 documents against the normative RELAX NG schema with embedded Schematron rules.
 
@@ -336,7 +336,7 @@ NVDL is a meta-schema language which can validate a document against several sch
 
 You can find a list of NVDL validators at L<http://nvdl.org/>. The following procedures show how to install and use the oNVDL and JNVDL validators.
 
-Download C<<<     onvdl-20070517.zip >>>.
+Download C<<< 	onvdl-20070517.zip >>>.
 
 Unpack the downloaded file into an arbitrary directory.
 
@@ -348,7 +348,7 @@ Download the latest release of JNVDL from L<http://sourceforge.net/project/showf
 
 Unpack the downloaded file into an arbitrary directory.
 
-Modify file C<<<     jnvdl.bat >>> (or C<<<     jnvdl.sh >>> on Unix based systems) to include C<<<     -Xss512K >>> switch directly after C<<<     java >>> command.
+Modify file C<<< 	jnvdl.bat >>> (or C<<< 	jnvdl.sh >>> on Unix based systems) to include C<<< 	-Xss512K >>> switch directly after C<<< 	java >>> command.
 
 On Windows systems, validate your document using the following command:
 
@@ -535,28 +535,28 @@ The following elements were removed from DocBook V5.0 without direct replacement
 
 |Old name|Recommended mapping|
 |--------|-------------------|
-|action|Use C<<<     < remap="action"> >>>.|
+|action|Use C<<< 	< remap="action"> >>>.|
 |beginpage|Remove: beginpage is advisory only and has tended to cause confusion. A processing instruction or comment should be a workable replacement if one is needed.|
 |highlights|Use abstract. Note that because highlights has a broader content model, you may need to wrap contents in a para inside abstract.|
 |interface|Use one of the “gui*” elements (guibutton, guiicon, guilabel, guimenu, guimenuitem, or guisubmenu).|
-|invpartnumber|Use C<<<     < class="other"
-    otherclass="medialabel"> >>>. The productnumber element is another alternative.|
-|medialabel|Use C<<<     <
-    pubwork=""> >>>, where mediatype is the type of media being labeled (e.g.,cdrom or dvd).|
+|invpartnumber|Use C<<< 	< class="other"
+	otherclass="medialabel"> >>>. The productnumber element is another alternative.|
+|medialabel|Use C<<< 	<
+	pubwork=""> >>>, where mediatype is the type of media being labeled (e.g.,cdrom or dvd).|
 |modespec|No longer needed. The current processing model for olink renders modespec unnecessary.|
-|structfield, structname|Use varname. If you need to distinguish between the two, use C<<<     <
-    remap=""> >>>. In some contexts, it may also be appropriate to use property for structfield.|
+|structfield, structname|Use varname. If you need to distinguish between the two, use C<<< 	<
+	remap=""> >>>. In some contexts, it may also be appropriate to use property for structfield.|
 
 
 =head1 Converting DocBook V4.x documents to DocBook V5.0
 
 The DocBook V5.0 schema ships with an XSLT 1.0 stylesheet that is designed to transform valid DocBook V4.x documents to valid DocBook V5.0 documents.
 
-To convert your document, C<<<     doc.xml >>> in the examples below, follow these steps:
+To convert your document, C<<< 	doc.xml >>> in the examples below, follow these steps:
 
 Check the validity of your DocBook XML V4.x document. The conversion tool assumes that the input document is valid. If the input document contains markup errors, the results will be unpredictable at best.
 
-Transform C<<<     doc.xml >>> to C<<<     newdoc.xml >>> with the C<<<     db4-upgrade.xsl >>> stylesheet included in the DocBook V5.0 distribution that you are using.
+Transform C<<< 	doc.xml >>> to C<<< 	newdoc.xml >>> with the C<<< 	db4-upgrade.xsl >>> stylesheet included in the DocBook V5.0 distribution that you are using.
 
 Check the validity of your DocBook XML V5.0 document against the DocBook V5.0 RELAX NG grammar.
 
@@ -573,9 +573,9 @@ If preserving entities is an important aspect of your production work flow, you 
 
 Open your existing document using your favorite editing tool. You must use a tool that I<is not> XML-aware, or one that allows you to edit markup “in the raw”.
 
-Replace all occurrences of the entity references that you want to preserve with some unique string. For example, if you want to preserve “C<<<     &Product; >>>” references, you could replace them all with “C<<<     [[[Product]]] >>>” (assuming that the string “C<<<     [[[Product]]] >>>” doesn't occur anywhere else in your document).
+Replace all occurrences of the entity references that you want to preserve with some unique string. For example, if you want to preserve “C<<< 	&Product; >>>” references, you could replace them all with “C<<< 	[[[Product]]] >>>” (assuming that the string “C<<< 	[[[Product]]] >>>” doesn't occur anywhere else in your document).
 
-Copy the document type declaration off of your document and save it some place. The document type declaration is everything from “C<<<     <!DOCTYPE >>>” to the closing “C<<<     ]> >>>”.
+Copy the document type declaration off of your document and save it some place. The document type declaration is everything from “C<<< 	<!DOCTYPE >>>” to the closing “C<<< 	]> >>>”.
 
 Perform the conversion described in ?.
 
@@ -583,7 +583,7 @@ Open the new document using your favorite editing tool. Replace all occurrences 
 
 Paste the document type declaration that you saved onto the top of your new document.
 
-Remove the external identifier (the C<<<     PUBLIC >>> and/or C<<<     SYSTEM >>> keywords) from the document type declaration. A document that begins:
+Remove the external identifier (the C<<< 	PUBLIC >>> and/or C<<< 	SYSTEM >>> keywords) from the document type declaration. A document that begins:
 
     <!DOCTYPE book [
     <!ENTITY someEntity "some replacement text">
@@ -600,9 +600,9 @@ is perfectly well-formed. If you don't remove the references to the DTD, then yo
 
 External parsed entities, entities which load part of a document from another file, are a special case. These can often be replaced with XInclude elements.
 
-The Perl script C<<<     db4-entities.pl >>>, also included in the DocBook V5.0 distribution attempts to perform this replacement for you. To use the script, perform the following steps:
+The Perl script C<<< 	db4-entities.pl >>>, also included in the DocBook V5.0 distribution attempts to perform this replacement for you. To use the script, perform the following steps:
 
-Process your document with C<<<     db4-entities.pl >>>. The script expects a single filename and prints the XInclude version on standard output.
+Process your document with C<<< 	db4-entities.pl >>>. The script expects a single filename and prints the XInclude version on standard output.
 
 Process the XInclude version as described in ?.
 
@@ -616,7 +616,7 @@ It's much easier to customize DocBook V5.0 than it was to customize earlier rele
 
 The DocBook RELAX NG schema is highly modular, using named patterns extensively. Every element, attribute, attribute list, and enumeration has its own named pattern. In addition, there are named patterns for logical combinations of elements and attributes. These named patterns provide “hooks” into the schema that allow you to do a wide range of customization by simply redefining one or more of the named patterns.
 
-An important design characteristic of the schema is that duplication is minimized. This is done through the use of named patterns for common groupings that can be re-used. For example, the imagedata and videodata elements each have an align attribute that takes the same set of enumerated values. Rather than repeating those values, a single pattern, C<<<     db.halign.enumeration >>> is referenced by the C<<<     db.videodata.align.enumeration >>> and C<<<     db.imagedata.align.enumeration >>> patterns, which are in turn referenced by the C<<<     db.videodata.align.attribute >>> and C<<<     db.imagedata.align.attribute >>> patterns. While this may seem like overkill, it allows a customizer to modify the allowed enumerations for these two attributes separately or together, or to completely re-define the allowed content of either or both, by redefining one or more of these named patterns.
+An important design characteristic of the schema is that duplication is minimized. This is done through the use of named patterns for common groupings that can be re-used. For example, the imagedata and videodata elements each have an align attribute that takes the same set of enumerated values. Rather than repeating those values, a single pattern, C<<< 	db.halign.enumeration >>> is referenced by the C<<< 	db.videodata.align.enumeration >>> and C<<< 	db.imagedata.align.enumeration >>> patterns, which are in turn referenced by the C<<< 	db.videodata.align.attribute >>> and C<<< 	db.imagedata.align.attribute >>> patterns. While this may seem like overkill, it allows a customizer to modify the allowed enumerations for these two attributes separately or together, or to completely re-define the allowed content of either or both, by redefining one or more of these named patterns.
 
 
 =head3 Pattern Names
@@ -639,25 +639,25 @@ The first part of each name is the prefix “db”
 
 =item -
 
-Each element has a named pattern in the form C<<<     db. >>>. Elements that have different content models in different contexts will also have patterns in the form C<<<     db. >>>. For example, C<<<     db.figure.info >>> defines the content model for the info element when it appears as a child of the figure element. Context may have several parts. For example, C<<<     db.cals.entrytbl.thead >>>.
+Each element has a named pattern in the form C<<< 	db. >>>. Elements that have different content models in different contexts will also have patterns in the form C<<< 	db. >>>. For example, C<<< 	db.figure.info >>> defines the content model for the info element when it appears as a child of the figure element. Context may have several parts. For example, C<<< 	db.cals.entrytbl.thead >>>.
 
 
 
 =item -
 
-Most attributes have a named pattern in the form C<<<     db..attribute >>>. Attributes that have different content models in different contexts will also have patterns in the form C<<<     db..attribute >>>. For example, C<<<     db.olink.localinfo.attribute >>> defines the content model of the localinfo attribute when it appears in olink. There are a few attributes that do not have individual named patterns. For example, the effectivity attributes are grouped into C<<<     db.effectivity.attributes >>> and not identified separately.
+Most attributes have a named pattern in the form C<<< 	db..attribute >>>. Attributes that have different content models in different contexts will also have patterns in the form C<<< 	db..attribute >>>. For example, C<<< 	db.olink.localinfo.attribute >>> defines the content model of the localinfo attribute when it appears in olink. There are a few attributes that do not have individual named patterns. For example, the effectivity attributes are grouped into C<<< 	db.effectivity.attributes >>> and not identified separately.
 
 
 
 =item -
 
-Each element has a named pattern for its attribute list in the form C<<<     db..attlist >>> that defines the list of attributes for that element. Elements that have different attribute lists in different contexts will also have patterns in the form C<<<     db..attlist >>> For example, C<<<     db.html.table.attlist >>> defines the attribute list for the html table element and C<<<     db.cals.table.attlist >>> defines the attribute list for a cals table element.
+Each element has a named pattern for its attribute list in the form C<<< 	db..attlist >>> that defines the list of attributes for that element. Elements that have different attribute lists in different contexts will also have patterns in the form C<<< 	db..attlist >>> For example, C<<< 	db.html.table.attlist >>> defines the attribute list for the html table element and C<<< 	db.cals.table.attlist >>> defines the attribute list for a cals table element.
 
 
 
 =item -
 
-Each attribute that has enumerated values has a named pattern in the form C<<<     db..enumeration >>>. If the enumeration for a particular attribute depends on context, optional context is provided. For example, C<<<     db.verbatim.continuation.enumeration >>> defines the enumeration values for the continuation attribute that is used in verbatim contexts like screen. Unlike elements and attributes, there is not necessarily a named pattern for enumerated attributes outside their context. For example, there is no C<<<     db.class.enumeration >>> because the class attribute has a broad and non-intersecting range of uses.
+Each attribute that has enumerated values has a named pattern in the form C<<< 	db..enumeration >>>. If the enumeration for a particular attribute depends on context, optional context is provided. For example, C<<< 	db.verbatim.continuation.enumeration >>> defines the enumeration values for the continuation attribute that is used in verbatim contexts like screen. Unlike elements and attributes, there is not necessarily a named pattern for enumerated attributes outside their context. For example, there is no C<<< 	db.class.enumeration >>> because the class attribute has a broad and non-intersecting range of uses.
 
 
 
@@ -667,23 +667,23 @@ There are several different groupings of elements and attributes. Here are the m
 
 inlines
 
-Combinations of inline elements, for example, C<<<     db.error.inlines >>>, which contains C<<<     db.errorcode >>>, C<<<     db.errortext >>>, etc.
+Combinations of inline elements, for example, C<<< 	db.error.inlines >>>, which contains C<<< 	db.errorcode >>>, C<<< 	db.errortext >>>, etc.
 
 blocks
 
-Combinations of block elements, for example, C<<<     db.verbatim.blocks >>>, which contains C<<<     db.programlisting >>>, C<<<     db.screen >>>, etc.
+Combinations of block elements, for example, C<<< 	db.verbatim.blocks >>>, which contains C<<< 	db.programlisting >>>, C<<< 	db.screen >>>, etc.
 
 attributes
 
-Combinations of attributes, for example, C<<<     db.effectivity.attributes >>>, which contains the attributes arch, condition, conformance, etc.
+Combinations of attributes, for example, C<<< 	db.effectivity.attributes >>>, which contains the attributes arch, condition, conformance, etc.
 
 components
 
-High level components of the schema, for example, C<<<     db.navigation.components >>>, which contains C<<<     db.glossary >>>, C<<<     db.bibliography >>>, C<<<     db.index >>>, and C<<<     db.toc >>>, and is used inside the content model for chapter, appendix, and preface.
+High level components of the schema, for example, C<<< 	db.navigation.components >>>, which contains C<<< 	db.glossary >>>, C<<< 	db.bibliography >>>, C<<< 	db.index >>>, and C<<< 	db.toc >>>, and is used inside the content model for chapter, appendix, and preface.
 
 contentmodel
 
-Shared content models, for example, C<<<     db.admonition.contentmodel >>>, which contains the content model for tip, warning, note, etc.
+Shared content models, for example, C<<< 	db.admonition.contentmodel >>>, which contains the content model for tip, warning, note, etc.
 
 There are a couple of other groupings designed to minimize duplication, but these are the most important.
 
@@ -728,27 +728,27 @@ Adding an element typically takes two definitions. The first defines the new ele
 
 ? adds a new element, person, with the same content model as author. The new element will be allowed to appear wherever author can appear.
 
-The C<<<     db.author >>> pattern is copied and renamed C<<<     dbx.person >>>, defining a new element called person. Then, the C<<<     db.author >>> pattern is redefined to be a choice of the current value or C<<<     dbx.person >>>. The combine attribute tells RELAX NG to combine this pattern with the existing named pattern. In this case, the value of the combine attribute is “choice”, which tells the parser that either the original pattern or this new pattern is a valid match.
+The C<<< 	db.author >>> pattern is copied and renamed C<<< 	dbx.person >>>, defining a new element called person. Then, the C<<< 	db.author >>> pattern is redefined to be a choice of the current value or C<<< 	dbx.person >>>. The combine attribute tells RELAX NG to combine this pattern with the existing named pattern. In this case, the value of the combine attribute is “choice”, which tells the parser that either the original pattern or this new pattern is a valid match.
 
-C<<<     {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng"/>
-      <!-- define the new element -->
-      <define name="dbx.person">
-        <element name="person">
-            <ref name="db.author.attlist"/>
-            <ref name="db.credit.contentmodel"/>
-        </element>
-      </define>
-      <!-- redefine the db.author pattern to allow db.person in
-           the same places as db.author -->
-      <define name="db.author" combine="choice">
-        <ref name="dbx.person"/>
-      </define>
-    </grammar>
+C<<< 	{.rng}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<grammar xmlns:db="http://docbook.org/ns/docbook"
+	         ns="http://docbook.org/ns/docbook"
+	         xmlns="http://relaxng.org/ns/structure/1.0">
+	  <include href="docbook.rng"/>
+	  <!-- define the new element -->
+	  <define name="dbx.person">
+	    <element name="person">
+	        <ref name="db.author.attlist"/>
+	        <ref name="db.credit.contentmodel"/>
+	    </element>
+	  </define>
+	  <!-- redefine the db.author pattern to allow db.person in
+	       the same places as db.author -->
+	  <define name="db.author" combine="choice">
+	    <ref name="dbx.person"/>
+	  </define>
+	</grammar>
  >>>
 
 ```{.rnc}
@@ -773,40 +773,40 @@ db.author |= dbx.person
 
 The preceding method works well when you'd like a new element to be a clone or near-clone of an existing element. It gives you complete control over the content model, but only limited control over where the element is allowed. It works well when you want to allow the element in the same places as an existing element, and for this example that works nicely, since author is allowed in four different named patterns, each of which would have had to be redefined to allow person. But, if you can't find an existing element that is allowed in exactly the places you need, this method doesn't work as well.
 
-? adds two new elements by combining them into a higher level pattern. In this example, we'll add two new inline elements for writing about assembly language, register and instruction. We will allow them wherever programming inlines or operating system inlines are allowed. ? defines the two elements, creates a new named pattern (C<<<     dbx.asm.inlines >>>) that contains them, and adds that pattern to C<<<     db.programming.inlines >>> and C<<<     db.os.inlines >>>. Since these two patterns don't have any elements in common, the strategy used in ? would require selecting two different elements to “clone”, which would be messy.
+? adds two new elements by combining them into a higher level pattern. In this example, we'll add two new inline elements for writing about assembly language, register and instruction. We will allow them wherever programming inlines or operating system inlines are allowed. ? defines the two elements, creates a new named pattern (C<<< 	dbx.asm.inlines >>>) that contains them, and adds that pattern to C<<< 	db.programming.inlines >>> and C<<< 	db.os.inlines >>>. Since these two patterns don't have any elements in common, the strategy used in ? would require selecting two different elements to “clone”, which would be messy.
 
-C<<<     {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng"/>
-      <!-- define the new elements -->
-      <define name="dbx.register">
-        <element name="register">
-          <text/>
-        </element>
-      </define>
-      <define name="dbx.instruction">
-        <element name="instruction">
-          <text/>
-        </element>
-      </define>
-      <!-- create a new pattern that contains the new inlines -->
-      <define name="dbx.asm.inlines">
-        <choice>
-          <ref name="dbx.register"/>
-          <ref name="dbx.instruction"/>
-        </choice>
-      </define>
-      <!-- add the new inlines to programming and os inlines -->
-        <define name="db.programming.inlines" combine="choice">
-          <ref name="dbx.asm.inlines"/>
-        </define>
-        <define name="db.os.inlines" combine="choice">
-          <ref name="dbx.asm.inlines"/>
-        </define>
-    </grammar>
+C<<< 	{.rng}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<grammar xmlns:db="http://docbook.org/ns/docbook"
+	         ns="http://docbook.org/ns/docbook"
+	         xmlns="http://relaxng.org/ns/structure/1.0">
+	  <include href="docbook.rng"/>
+	  <!-- define the new elements -->
+	  <define name="dbx.register">
+	    <element name="register">
+	      <text/>
+	    </element>
+	  </define>
+	  <define name="dbx.instruction">
+	    <element name="instruction">
+	      <text/>
+	    </element>
+	  </define>
+	  <!-- create a new pattern that contains the new inlines -->
+	  <define name="dbx.asm.inlines">
+	    <choice>
+	      <ref name="dbx.register"/>
+	      <ref name="dbx.instruction"/>
+	    </choice>
+	  </define>
+	  <!-- add the new inlines to programming and os inlines -->
+	    <define name="db.programming.inlines" combine="choice">
+	      <ref name="dbx.asm.inlines"/>
+	    </define>
+	    <define name="db.os.inlines" combine="choice">
+	      <ref name="dbx.asm.inlines"/>
+	    </define>
+	</grammar>
  >>>
 
 ```{.rnc}
@@ -835,22 +835,22 @@ db.os.inlines |= dbx.asm.inlines
 
 =head3 Deleting elements
 
-Deleting elements is straightforward, but takes some care and planning. ? deletes the important admonition element by redefining it with a content model of C<<<     notAllowed >>>. Note that in this example, the redefinition is inside the include element. This is required for redefinitions that completely replace an existing pattern.
+Deleting elements is straightforward, but takes some care and planning. ? deletes the important admonition element by redefining it with a content model of C<<< 	notAllowed >>>. Note that in this example, the redefinition is inside the include element. This is required for redefinitions that completely replace an existing pattern.
 
 Be careful; If you delete an element that is a required part of another element's content model, you can make it impossible to create a valid document. For example, if you delete the title element, you won't be able to validate a book because a book requires a title.
 
-C<<<     {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng">
-        <!-- redefine important element as notAllowed -->
-        <define name="db.important">
-          <notAllowed/>
-        </define>
-      </include>
-    </grammar>
+C<<< 	{.rng}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<grammar xmlns:db="http://docbook.org/ns/docbook"
+	         ns="http://docbook.org/ns/docbook"
+	         xmlns="http://relaxng.org/ns/structure/1.0">
+	  <include href="docbook.rng">
+	    <!-- redefine important element as notAllowed -->
+	    <define name="db.important">
+	      <notAllowed/>
+	    </define>
+	  </include>
+	</grammar>
  >>>
 
 ```{.rnc}
@@ -865,7 +865,7 @@ include "docbook.rnc" inherit = db {
 
 =head3 Customizing the content model of existing elements
 
-? expands the definition of author to include two new elements, born and died. The author element allows two content models, C<<<     db.person.author.contentmodel >>>, which defines an author who is a person, and C<<<     db.org.author.contentmodel >>>, which defines an author that is an organization. We will modify C<<<     db.person.author.contentmodel >>> so that only authors who are persons can have the new elements.
+? expands the definition of author to include two new elements, born and died. The author element allows two content models, C<<< 	db.person.author.contentmodel >>>, which defines an author who is a person, and C<<< 	db.org.author.contentmodel >>>, which defines an author that is an organization. We will modify C<<< 	db.person.author.contentmodel >>> so that only authors who are persons can have the new elements.
 
 ```{.rng}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -910,7 +910,7 @@ This modification will allow instances like this:
       <died>08/16/1948</died>
     </author>
 
-but because we only modified the content model for authors who are human, it won't allow an instance like this, which uses C<<<     db.org.author.contentmodel >>>:
+but because we only modified the content model for authors who are human, it won't allow an instance like this, which uses C<<< 	db.org.author.contentmodel >>>:
 
     <!-- INVALID -->
     <author>
@@ -925,7 +925,7 @@ but because we only modified the content model for authors who are human, it won
 
 =head3 Adding attributes
 
-The simplest way to add an attribute to a single element is to add it to the attlist pattern for that element. ? adds the optional attributes born and died to the attribute list for author. The C<<<     db.author.attlist >>> named pattern is redefined with the combine attribute set to “interleave”, which interleaves the two new optional attributes with the existing attributes on the list.
+The simplest way to add an attribute to a single element is to add it to the attlist pattern for that element. ? adds the optional attributes born and died to the attribute list for author. The C<<< 	db.author.attlist >>> named pattern is redefined with the combine attribute set to “interleave”, which interleaves the two new optional attributes with the existing attributes on the list.
 
 ```{.rng}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -963,30 +963,30 @@ db.author.attlist &=
 
 Unlike ?, ? allows the new attributes to appear on any author element, not just those using the person content model.
 
-? shows how you could limit the use of these attributes to authors who are persons. In this example, the new attributes are interleaved with the C<<<     db.person.author.contentmodel >>>. The only difference between this example and ? is that the added patterns are identified as attributes rather than elements. This shows some of the flexibility of RELAX NG, which treats attributes and elements very consistently.
+? shows how you could limit the use of these attributes to authors who are persons. In this example, the new attributes are interleaved with the C<<< 	db.person.author.contentmodel >>>. The only difference between this example and ? is that the added patterns are identified as attributes rather than elements. This shows some of the flexibility of RELAX NG, which treats attributes and elements very consistently.
 
-C<<<     {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng"/>
-      <!-- redefinitions of named patterns -->
-      <define name="db.person.author.contentmodel" combine="interleave">
-        <interleave>
-          <optional>
-            <attribute name="born">
-              <ref name="db.date.contentmodel"/>
-            </attribute>
-          </optional>
-          <optional>
-            <attribute name="died">
-              <ref name="db.date.contentmodel"/>
-            </attribute>
-          </optional>
-        </interleave>
-      </define>
-    </grammar>
+C<<< 	{.rng}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<grammar xmlns:db="http://docbook.org/ns/docbook"
+	         ns="http://docbook.org/ns/docbook"
+	         xmlns="http://relaxng.org/ns/structure/1.0">
+	  <include href="docbook.rng"/>
+	  <!-- redefinitions of named patterns -->
+	  <define name="db.person.author.contentmodel" combine="interleave">
+	    <interleave>
+	      <optional>
+	        <attribute name="born">
+	          <ref name="db.date.contentmodel"/>
+	        </attribute>
+	      </optional>
+	      <optional>
+	        <attribute name="died">
+	          <ref name="db.date.contentmodel"/>
+	        </attribute>
+	      </optional>
+	    </interleave>
+	  </define>
+	</grammar>
  >>>
 
 ```{.rnc}
@@ -1007,19 +1007,19 @@ There is one difference in the treatment of attributes and elements that is wort
 
 =head3 Deleting attributes
 
-Deleting an attribute is similar to deleting an element, except that you use the RELAX NG C<<<     empty >>> pattern rather than C<<<     notAllowed >>>. ? deletes the linking attributes, which are collected in the C<<<     db.common.linking.attributes >>> pattern, by defining that pattern as C<<<     empty >>>.
+Deleting an attribute is similar to deleting an element, except that you use the RELAX NG C<<< 	empty >>> pattern rather than C<<< 	notAllowed >>>. ? deletes the linking attributes, which are collected in the C<<< 	db.common.linking.attributes >>> pattern, by defining that pattern as C<<< 	empty >>>.
 
-C<<<     {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng">
-        <define name="db.common.linking.attributes">
-          <empty/>
-        </define>
-      </include>
-    </grammar>
+C<<< 	{.rng}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<grammar xmlns:db="http://docbook.org/ns/docbook"
+	         ns="http://docbook.org/ns/docbook"
+	         xmlns="http://relaxng.org/ns/structure/1.0">
+	  <include href="docbook.rng">
+	    <define name="db.common.linking.attributes">
+	      <empty/>
+	    </define>
+	  </include>
+	</grammar>
  >>>
 
 ```{.rnc}
@@ -1030,24 +1030,24 @@ include "docbook.rnc" inherit = db {
 }
 ```
 
-Generally, C<<<     empty >>> is used when deleting attributes and C<<<     notAllowed >>> is used when deleting elements.
+Generally, C<<< 	empty >>> is used when deleting attributes and C<<< 	notAllowed >>> is used when deleting elements.
 
 
 =head3 Changing permitted content of attributes
 
-? modifies C<<<     db.spacing.enumeration >>> to add the additional value “large”. Note that to remove a value from an enumeration, you need to redefine the entire enumeration, minus the values you don't need.
+? modifies C<<< 	db.spacing.enumeration >>> to add the additional value “large”. Note that to remove a value from an enumeration, you need to redefine the entire enumeration, minus the values you don't need.
 
-C<<<     {.rng}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <grammar xmlns:db="http://docbook.org/ns/docbook"
-             ns="http://docbook.org/ns/docbook"
-             xmlns="http://relaxng.org/ns/structure/1.0">
-      <include href="docbook.rng"/>
-      <!-- add value to an enumeration -->
-      <define name="db.spacing.enumeration" combine="choice">
-        <value>large</value>
-      </define>
-    </grammar>
+C<<< 	{.rng}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<grammar xmlns:db="http://docbook.org/ns/docbook"
+	         ns="http://docbook.org/ns/docbook"
+	         xmlns="http://relaxng.org/ns/structure/1.0">
+	  <include href="docbook.rng"/>
+	  <!-- add value to an enumeration -->
+	  <define name="db.spacing.enumeration" combine="choice">
+	    <value>large</value>
+	  </define>
+	</grammar>
  >>>
 
 ```{.rnc}
@@ -1088,7 +1088,7 @@ For example:
 
 The first part of the version identifier is the version number of the DocBook schema from which you derived your customization.
 
-If your schema is a proper subset, you can advertise this status by using the C<<<     subset >>> keyword in the description. If your schema contains any markup model extensions, you can advertise this status by using the C<<<     extension >>> keyword. If you'd rather not characterize your variant specifically as a subset or an extension, use the C<<<     variant >>> keyword.
+If your schema is a proper subset, you can advertise this status by using the C<<< 	subset >>> keyword in the description. If your schema contains any markup model extensions, you can advertise this status by using the C<<< 	extension >>> keyword. If you'd rather not characterize your variant specifically as a subset or an extension, use the C<<< 	variant >>> keyword.
 
 After these keywords you may add a whitespace separated list of customization identifiers. Each name may be optionally followed by its version number.
 
@@ -1130,7 +1130,7 @@ For your convenience there is also flattened entity definition file which contai
 
 B<Q:> How to modularize documents?
 
-B<A:> You can use L<XInclude|http://www.w3.org/TR/xinclude/> for this task. There is an alternative schema for DocBook V5.0 that contains XInclude elements. This is necessary to make some XML editors happy. This schema can be found in files that end with letters “xi”, e.g. C<<<     docbookxi.rnc >>> instead of C<<<     docbook.rnc >>>.
+B<A:> You can use L<XInclude|http://www.w3.org/TR/xinclude/> for this task. There is an alternative schema for DocBook V5.0 that contains XInclude elements. This is necessary to make some XML editors happy. This schema can be found in files that end with letters “xi”, e.g. C<<< 	docbookxi.rnc >>> instead of C<<< 	docbook.rnc >>>.
 
 B<Q:> How to validate documents which are composed by XInclude?
 
@@ -1138,7 +1138,7 @@ B<A:> If you are using XIncludes you should make sure that the final document af
 
      -Dorg.apache.xerces.xni.parser.XMLParserConfiguration=org.apache.xerces.parsers.XIncludeParserConfiguration -jar bin/onvdl.jar docbook.nvdl document.xml
 
-For JNVDL you can use switch C<<<     -xi >>> to enable XInclude processing.
+For JNVDL you can use switch C<<< 	-xi >>> to enable XInclude processing.
 
 
 =head2 Stylesheets
@@ -1158,9 +1158,9 @@ B<A:> The basic DocBook schema allows elements from the MathML namespace to appe
 
 If you need strict validation of MathML content or guided editing for MathML, you can easily extend the base DocBook schema with the MathML schema.
 
-Download the MathML RELAX NG schema from L<http://yupotan.sppd.ne.jp/relax-ng/mml2.html> and unpack it somewhere (e.g. into a C<<<     mathml >>> subdirectory).
+Download the MathML RELAX NG schema from L<http://yupotan.sppd.ne.jp/relax-ng/mml2.html> and unpack it somewhere (e.g. into a C<<< 	mathml >>> subdirectory).
 
-Create a schema customization in compact syntax—C<<<     dbmathml.rnc >>>:
+Create a schema customization in compact syntax—C<<< 	dbmathml.rnc >>>:
 
 ```{.rnc}
 namespace html = "http://www.w3.org/1999/xhtml"
@@ -1178,7 +1178,7 @@ include "/path/to/docbook.rnc" {
 }
 ```
 
-Or, alternatively, you can use the XML syntax of RELAX NG—C<<<     dbmathml.rng >>>:
+Or, alternatively, you can use the XML syntax of RELAX NG—C<<< 	dbmathml.rng >>>:
 
 ```{.rng}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1214,15 +1214,15 @@ Or, alternatively, you can use the XML syntax of RELAX NG—C<<<     dbmathml.rn
 
 ```
 
-Now use the customized schema (C<<<     dbmathml.rnc >>> or C<<<     dbmathml.rng >>>) instead of the original DocBook schema.
+Now use the customized schema (C<<< 	dbmathml.rnc >>> or C<<< 	dbmathml.rng >>>) instead of the original DocBook schema.
 
 B<Q:> How can I extend the DocBook schema with SVG elements?
 
 B<A:> The situation is the same as with MathML support. You can use elements from the SVG namespace inside the imageobject element.
 
-Download the SVG RELAX NG schema from L<http://www.w3.org/Graphics/SVG/1.1/rng/rng.zip> and unpack it somewhere (e.g. into an C<<<     svg >>> subdirectory).
+Download the SVG RELAX NG schema from L<http://www.w3.org/Graphics/SVG/1.1/rng/rng.zip> and unpack it somewhere (e.g. into an C<<< 	svg >>> subdirectory).
 
-Create a schema customization in compact syntax—C<<<     dbsvg.rnc >>>:
+Create a schema customization in compact syntax—C<<< 	dbsvg.rnc >>>:
 
 ```{.rnc}
 namespace html = "http://www.w3.org/1999/xhtml"
@@ -1240,7 +1240,7 @@ include "/path/to/docbook.rnc" {
 }
 ```
 
-Or, alternatively, you can use the XML syntax of RELAX NG—C<<<     dbsvg.rng >>>:
+Or, alternatively, you can use the XML syntax of RELAX NG—C<<< 	dbsvg.rng >>>:
 
 ```{.rng}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1276,7 +1276,7 @@ Or, alternatively, you can use the XML syntax of RELAX NG—C<<<     dbsvg.rng >
 
 ```
 
-Now use the customized schema (C<<<     dbsvg.rnc >>> or C<<<     dbsvg.rng >>>) instead of the original DocBook schema.
+Now use the customized schema (C<<< 	dbsvg.rnc >>> or C<<< 	dbsvg.rng >>>) instead of the original DocBook schema.
 
 B<Q:> Is it possible to use the previous two customizations for MathML and SVG together?
 
@@ -1364,9 +1364,9 @@ L<Examples on DocBook WiKi|http://wiki.docbook.org/topic/DocbookSchemas>
 
 =head2 Tool specific problems
 
-B<Q:> I'm using Altova XMLSpy to validate DocBook V5.0 instances against the W3C XML Schema (C<<<     docbook.xsd >>>). XMLSpy complains about undefined xml:id attributes?
+B<Q:> I'm using Altova XMLSpy to validate DocBook V5.0 instances against the W3C XML Schema (C<<< 	docbook.xsd >>>). XMLSpy complains about undefined xml:id attributes?
 
-B<A:> XMLSpy always uses its own bundled version of C<<<     xml.xsd >>> which unfortunately doesn't define the xml:id attribute. The bundled version of C<<<     xml.xsd >>> is hardwired into the program and cannot be replaced by a newer version. To solve this problem you must upgrade to version 2006 SP1.
+B<A:> XMLSpy always uses its own bundled version of C<<< 	xml.xsd >>> which unfortunately doesn't define the xml:id attribute. The bundled version of C<<< 	xml.xsd >>> is hardwired into the program and cannot be replaced by a newer version. To solve this problem you must upgrade to version 2006 SP1.
 
 RNCTUT Clark, James – Cowan, John – MURATA, Makoto: . Working Draft, 26 March 2003. OASIS. L<http://relaxng.org/compact-tutorial-20030326.html>
 
@@ -1376,7 +1376,7 @@ XMLID Marsh, Jonathan – Veillard, Daniel – Walsh, Norman: . W3C Recommendati
 
 DB5SPEC Norman, Walsh: . Working Draft 5.0a1, OASIS, 29 June 2005. L<http://www.docbook.org/specs/wd-docbook-docbook-5.0a1.html>
 
-[1] In a very few places RELAX NG specifies datatype like number (mainly for length specifications) or enumeration between C<<<     0 >>> and C<<<     1 >>>.
+[1] In a very few places RELAX NG specifies datatype like number (mainly for length specifications) or enumeration between C<<< 	0 >>> and C<<< 	1 >>>.
 
 In general those datatypes can be also supported in W3C XML Schema, but currently this schema is generated from DTD which lacks datatype information.
 
@@ -1392,4 +1392,4 @@ Please also note that in theory co-occurences can be validated using Schematron,
 
 [5] Prevents improper nesting of elements, like admonition inside admonition.
 
-[6] The examples in this section use C<<<     docbook.rng >>> as the schema location. If you want to create a portable schema customization you should use a standard web-accessible location like L<http://docbook.org/xml/VERSION/rng/docbook.rng> and then use L<XML catalogs|http://www.oasis-open.org/committees/download.php/14809/xml-catalogs.html> to resolve this location to your local copy of the schema for improved performance. Unfortunately, at the time of this writing not all RELAX NG validators support XML catalogs.
+[6] The examples in this section use C<<< 	docbook.rng >>> as the schema location. If you want to create a portable schema customization you should use a standard web-accessible location like L<http://docbook.org/xml/VERSION/rng/docbook.rng> and then use L<XML catalogs|http://www.oasis-open.org/committees/download.php/14809/xml-catalogs.html> to resolve this location to your local copy of the schema for improved performance. Unfortunately, at the time of this writing not all RELAX NG validators support XML catalogs.
