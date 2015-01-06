@@ -39,6 +39,7 @@ B<Note>
 The namespace name L<http://docbook.org/ns/docbook> serves only as an identifier. This resource is not fetched during processing of DocBook documents, and you are not required to have an Internet connection during processing. If you access the namespace URI with a browser, you will find a short explanatory document about the namespace. In the future this document will probably conform to (some version of) RDDL and provide pointers to related resources.
 
 =back
+
 =head2 Relaxing with DocBook
 
 For more than a decade, the DocBook schema was defined using a DTD. However, DTDs have serious limitations, and DocBook V5.0 is thus defined using a very powerful schema language called RELAX NG. Thanks to RELAX NG, it is now much easier to create customized versions of DocBook, and some content models are now cleaner and more precise.
@@ -72,6 +73,7 @@ B<Note>
 Although we recommend the RELAX NG schema for DocBook V5.0, there are also DTD and W3C XML Schema versions available (see ?) for tools that do not yet support RELAX NG.
 
 =back
+
 =head2 Why switch to DocBook V5.0?
 
 The simple answer is “because DocBook V5.0 is the future”. Apart from this marketing blurb, there are also more technical reasons:
@@ -261,6 +263,7 @@ B<Note>
 Other parts of DocBook: The Definitive Guide have not yet been updated to reflect the changes made in DocBook V5.0. Please do not be confused by this.
 
 =back
+
 =head1 Tool chain
 
 This section briefly describes tools and procedures to edit and process content stored in DocBook V5.0.
@@ -287,7 +290,8 @@ B<Note>
 
 Please note that nXML ships with a file named C<<< docbook.rnc >>>. This file contains the RELAX NG grammar for DocBook V4.x. Be sure that you associate the DocBook V5.0 namespace with the corresponding DocBook V5.0 grammar.
 
-=backIf you can't edit the global C<<< schemas.xml >>> file, you can create this file in the same directory as your document. nXML will find associations placed there also. In this case you must create a complete configuration file like:
+=back
+If you can't edit the global C<<< schemas.xml >>> file, you can create this file in the same directory as your document. nXML will find associations placed there also. In this case you must create a complete configuration file like:
 
     <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
       <namespace ns="http://docbook.org/ns/docbook" uri="/path/to/docbook.rnc"/>
@@ -339,7 +343,8 @@ B<Note>
 
 The switch C<<< -Xss512K >>> increases the stack size of the Java virtual machine. This is necessary because the DocBook schema is quite large. If you get stack overflow errors from MSV, increase this value. You may get spurious error messages if the value is too small, so if you get a stack overflow error, ignore any other error messages and try a larger value for the stack size. If you are not using Sun's Java implementation, please consult the documentation for your virtual machine to learn how to increase the stack size.
 
-=backThere is also an L<on-line DocBook V5.0 validator|http://relaxed.vse.cz/docbookvalidator/> that validates DocBook V5.0 documents against the normative RELAX NG schema with embedded Schematron rules.
+=back
+There is also an L<on-line DocBook V5.0 validator|http://relaxed.vse.cz/docbookvalidator/> that validates DocBook V5.0 documents against the normative RELAX NG schema with embedded Schematron rules.
 
 
 =head3 Using NVDL
@@ -414,6 +419,7 @@ During namespace stripping, the base URI of the document is lost. This means tha
     WARNING: cannot add @xml:base to node set root element. Relative paths may not work.
 
 =back
+
 =head3 DocBook XSL-NS Stylesheets
 
 As you can see from reading the previous section, namespace stripping has limitations that will cause trouble in some situations. To overcome those limitations, Bob Stayton created a build system for taking the non-namespace-aware DocBook XSL stylesheets and generating namespace-aware versions from them. The DocBook L<XSL-NS stylesheets|http://docbook.sourceforge.net/release/xsl-ns/current/> are the result.
@@ -615,6 +621,7 @@ B<Tip>
 Steps 2 and 5 from previous procedure can be automated using the L<cloak script|http://docbook.svn.sourceforge.net/viewvc/docbook/trunk/contrib/tools/cloak> written by Michael Smith.
 
 =back
+
 =head3 External Parsed Entities
 
 External parsed entities, entities which load part of a document from another file, are a special case. These can often be replaced with XInclude elements.
