@@ -1,7 +1,3 @@
-$VAR1 = [
-          'text',
-          ' redefinitions of named patterns '
-        ];
 =encoding utf8
 
 This document is targeted at DocBook users who are considering switching from DocBook V4.x to DocBook V5.0. It describes differences between DocBook V4.x and V5.0 and provides some suggestions about how to edit and process DocBook V5.0 documents. There is also a section devoted to conversion of legacy documents from DocBook 4.x to DocBook V5.0.
@@ -32,9 +28,12 @@ The corresponding DocBook V5.0 article will look very similar:
 
 The only change is the addition of a default namespace declaration (C<<< xmlns="http://docbook.org/ns/docbook" >>>) on the root element. This declaration applies the namespace to the root element and all nested elements. Each element is now uniquely identified by its local name and namespace.
 
-    B<Note>
-    
-    The namespace name L<http://docbook.org/ns/docbook> serves only as an identifier. This resource is not fetched during processing of DocBook documents, and you are not required to have an Internet connection during processing. If you access the namespace URI with a browser, you will find a short explanatory document about the namespace. In the future this document will probably conform to (some version of) RDDL and provide pointers to related resources.
+=begin blockquote
+B<Note>
+
+The namespace name L<http://docbook.org/ns/docbook> serves only as an identifier. This resource is not fetched during processing of DocBook documents, and you are not required to have an Internet connection during processing. If you access the namespace URI with a browser, you will find a short explanatory document about the namespace. In the future this document will probably conform to (some version of) RDDL and provide pointers to related resources.
+
+=end blockquote
 
 
 =head2 Relaxing with DocBook
@@ -63,9 +62,12 @@ As you can see, DocBook V5.0 is built on top of existing XML standards as much a
 
 Another fundamental change is that there is no direct indication of the schema used. Later in this document, you will learn how you can specify a schema to be used for document validation.
 
-    B<Note>
-    
-    Although we recommend the RELAX NG schema for DocBook V5.0, there are also DTD and W3C XML Schema versions available (see ?) for tools that do not yet support RELAX NG.
+=begin blockquote
+B<Note>
+
+Although we recommend the RELAX NG schema for DocBook V5.0, there are also DTD and W3C XML Schema versions available (see ?) for tools that do not yet support RELAX NG.
+
+=end blockquote
 
 
 =head2 Why switch to DocBook V5.0?
@@ -248,9 +250,12 @@ These schemas are also available from the mirror at L<http://www.oasis-open.org/
 
 Detailed documentation about each DocBook V5.0 element is presented in L<the reference part of DocBook: The Definitive Guide|http://docbook.org/tdg5/en/html/pt02.html>.
 
-    B<Note>
-    
-    Other parts of DocBook: The Definitive Guide have not yet been updated to reflect the changes made in DocBook V5.0. Please do not be confused by this.
+=begin blockquote
+B<Note>
+
+Other parts of DocBook: The Definitive Guide have not yet been updated to reflect the changes made in DocBook V5.0. Please do not be confused by this.
+
+=end blockquote
 
 
 =head1 Tool chain
@@ -273,9 +278,12 @@ nXML uses a special configuration file named C<<< schemas.xml >>> to associate s
 
     <namespace ns="http://docbook.org/ns/docbook" uri="docbook.rnc"/>
 
-    B<Note>
-    
-    Please note that nXML ships with a file named C<<< docbook.rnc >>>. This file contains the RELAX NG grammar for DocBook V4.x. Be sure that you associate the DocBook V5.0 namespace with the corresponding DocBook V5.0 grammar.
+=begin blockquote
+B<Note>
+
+Please note that nXML ships with a file named C<<< docbook.rnc >>>. This file contains the RELAX NG grammar for DocBook V4.x. Be sure that you associate the DocBook V5.0 namespace with the corresponding DocBook V5.0 grammar.
+
+=end blockquote
 
 If you can't edit the global C<<< schemas.xml >>> file, you can create this file in the same directory as your document. nXML will find associations placed there also. In this case you must create a complete configuration file like:
 
@@ -323,9 +331,12 @@ Validate your document using the following command:
 
      -Xss512K -jar relames.jar docbook.rng document.xml
 
-    B<Note>
-    
-    The switch C<<< -Xss512K >>> increases the stack size of the Java virtual machine. This is necessary because the DocBook schema is quite large. If you get stack overflow errors from MSV, increase this value. You may get spurious error messages if the value is too small, so if you get a stack overflow error, ignore any other error messages and try a larger value for the stack size. If you are not using Sun's Java implementation, please consult the documentation for your virtual machine to learn how to increase the stack size.
+=begin blockquote
+B<Note>
+
+The switch C<<< -Xss512K >>> increases the stack size of the Java virtual machine. This is necessary because the DocBook schema is quite large. If you get stack overflow errors from MSV, increase this value. You may get spurious error messages if the value is too small, so if you get a stack overflow error, ignore any other error messages and try a larger value for the stack size. If you are not using Sun's Java implementation, please consult the documentation for your virtual machine to learn how to increase the stack size.
+
+=end blockquote
 
 There is also an L<on-line DocBook V5.0 validator|http://relaxed.vse.cz/docbookvalidator/> that validates DocBook V5.0 documents against the normative RELAX NG schema with embedded Schematron rules.
 
@@ -393,11 +404,14 @@ general XLink links on all elements.
 
 =back
 
-    B<Note>
-    
-    During namespace stripping, the base URI of the document is lost. This means that in rare situations, relatively referenced resources like images or programlistings can be processed incorrectly. The stylesheets attempt to compensate for this problem, but that is not always possible. When an XSLT processor other than Saxon or Xalan is used, a warning message is generated:
-    
-        WARNING: cannot add @xml:base to node set root element. Relative paths may not work.
+=begin blockquote
+B<Note>
+
+During namespace stripping, the base URI of the document is lost. This means that in rare situations, relatively referenced resources like images or programlistings can be processed incorrectly. The stylesheets attempt to compensate for this problem, but that is not always possible. When an XSLT processor other than Saxon or Xalan is used, a warning message is generated:
+
+    WARNING: cannot add @xml:base to node set root element. Relative paths may not work.
+
+=end blockquote
 
 
 =head3 DocBook XSL-NS Stylesheets
@@ -591,9 +605,12 @@ Remove the external identifier (the C<<< PUBLIC >>> and/or C<<< SYSTEM >>> keywo
 
 is perfectly well-formed. If you don't remove the references to the DTD, then your parser will likely try to validate against DocBook V4.0 and that's not going to work. Alternatively, you could refer to the DocBook V5.0 DTD.
 
-    B<Tip>
-    
-    Steps 2 and 5 from previous procedure can be automated using the L<cloak script|http://docbook.svn.sourceforge.net/viewvc/docbook/trunk/contrib/tools/cloak> written by Michael Smith.
+=begin blockquote
+B<Tip>
+
+Steps 2 and 5 from previous procedure can be automated using the L<cloak script|http://docbook.svn.sourceforge.net/viewvc/docbook/trunk/contrib/tools/cloak> written by Michael Smith.
+
+=end blockquote
 
 
 =head3 External Parsed Entities
@@ -705,6 +722,10 @@ Creating a customized schema is similar to creating a customization layer for XS
          xmlns="http://relaxng.org/ns/structure/1.0">
   <include href="docbook.rng"/>
 
+$VAR1 = [
+          'text',
+          ' redefinitions of named patterns '
+        ];
 bar
 ```
 
@@ -1393,3 +1414,4 @@ Please also note that in theory co-occurences can be validated using Schematron,
 [5] Prevents improper nesting of elements, like admonition inside admonition.
 
 [6] The examples in this section use C<<< docbook.rng >>> as the schema location. If you want to create a portable schema customization you should use a standard web-accessible location like L<http://docbook.org/xml/VERSION/rng/docbook.rng> and then use L<XML catalogs|http://www.oasis-open.org/committees/download.php/14809/xml-catalogs.html> to resolve this location to your local copy of the schema for improved performance. Unfortunately, at the time of this writing not all RELAX NG validators support XML catalogs.
+
